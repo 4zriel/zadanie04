@@ -26,29 +26,12 @@ namespace Zadanie04_weather
 	{
 		public NotifyIcon TrayIcon { get; set; }
 
-		public string BaseURL { get; set; }
-
-		public string YahooQuery { get; set; }
-
-		public WebRequest MainRequest { get; set; }
-
-		public HttpWebResponse MainResponse { get; set; }
-
 		public MainWindow()
 		{
 			InitializeComponent();
 			InitializeApp();
-			string test = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=xml&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-			MainRequest = WebRequest.Create(test);
-			MainResponse = (HttpWebResponse)MainRequest.GetResponse();
-			Console.WriteLine(MainResponse.StatusDescription);
-			Stream dataStream = MainResponse.GetResponseStream();
-			StreamReader reader = new StreamReader(dataStream);
-			string test2 = reader.ReadToEnd();
-			Console.WriteLine(test2);
-			reader.Close();
-			dataStream.Close();
-			MainResponse.Close();
+
+			Weather testowy = new Weather("Katowice");
 		}
 
 		public void InitializeApp()
@@ -56,7 +39,6 @@ namespace Zadanie04_weather
 			TrayIcon = new NotifyIcon();
 			TrayIcon.Icon = new Icon("Resources/main.ico");
 			TrayIcon.Visible = true;
-			BaseURL = "https://query.yahooapis.com/v1/public/yql?";
 		}
 
 		protected override void OnStateChanged(EventArgs e)
@@ -68,5 +50,3 @@ namespace Zadanie04_weather
 		}
 	}
 }
-
-//https://query.yahooapis.com/v1/public/yql?q=select%20item.condition.text%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22dallas%2C%20tx%22)&format=xml&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys
