@@ -23,7 +23,7 @@ namespace Zadanie04_weather
 
 		public string LocationQuerry { get; set; }
 
-		public XWeather XMLRespons { get; set; }
+		public XWeather XMLResponse { get; set; }
 
 		public Weather(string loc, char units = 'c')
 		{
@@ -33,7 +33,12 @@ namespace Zadanie04_weather
 			Location = loc;
 			LocationQuerry = string.Format("https://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.places%20where%20text%3D%22{0}%22&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", loc);
 			this.getWOEID(LocationQuerry);
-			XMLRespons = new XWeather(string.Format(BaseRSSurl + "?w={0}&u={1}", this.Woeid, this.Units));
+			XMLResponse = new XWeather(string.Format(BaseRSSurl + "?w={0}&u={1}", this.Woeid, this.Units));
+		}
+
+		public void Refresh()
+		{
+			XMLResponse = new XWeather(string.Format(BaseRSSurl + "?w={0}&u={1}", this.Woeid, this.Units));
 		}
 
 		private void getWOEID(string LocQuerry)
