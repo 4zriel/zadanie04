@@ -40,7 +40,7 @@ namespace Zadanie04_weather
 			Weather testowy = new Weather("Katowice");
 			Weather testowy2 = new Weather("Dąbrowa Górnicza");
 			Weather testowy3 = new Weather("grand canyon, az");
-			testText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
+			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
 		}
 
 		public void InitializeApp()
@@ -62,7 +62,7 @@ namespace Zadanie04_weather
 		private void timerHandler(object sender, EventArgs e)
 		{
 			this.appWeather.Refresh();
-			testText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
+			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
 		}
 
 		private void InitializeTray()
@@ -103,7 +103,7 @@ namespace Zadanie04_weather
 		private void Menu_Refresh(object sender, RoutedEventArgs e)
 		{
 			this.appWeather.Refresh();
-			testText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
+			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
 		}
 
 		private void Menu_Open(object sender, RoutedEventArgs e)
@@ -116,6 +116,10 @@ namespace Zadanie04_weather
 		private void Menu_Close(object sender, RoutedEventArgs e)
 		{
 			this.Close();
+		}
+
+		private void searchButton_click(object sender, RoutedEventArgs e)
+		{
 		}
 	}
 }

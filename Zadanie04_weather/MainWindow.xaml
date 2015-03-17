@@ -4,13 +4,26 @@
 		Title="Zadanie04 - weatherApp" Height="600" Width="800">
 	<Window.Resources>
 		<ContextMenu x:Key="NotifierContextMenu"
-                    Placement="MousePoint">
+					Placement="MousePoint">
 			<MenuItem Header="Open" Click="Menu_Open" />
 			<MenuItem Header="Refresh" Click="Menu_Refresh" />
 			<MenuItem Header="Close" Click="Menu_Close" />
 		</ContextMenu>
 	</Window.Resources>
 	<Grid>
-		<TextBox x:Name="testText" HorizontalAlignment="Left" Height="96" Margin="141,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="385" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="3*" />
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*" />
+				<ColumnDefinition Width="8*" />
+			</Grid.ColumnDefinitions>
+			<TextBox Grid.Row="0" Grid.Column="1" x:Name="cityText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Margin="10,46,224,48" TextWrapping="Wrap" Text=""  Width="400" BorderThickness="3" Background="#FFABADB3" FontSize="18" />
+			<TextBlock Grid.Row="0" Grid.Column="0" x:Name="cityLabel" Height="44" Width="138" Text="City:" Margin="10,80,10,66" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="20" FontWeight="Bold" />
+			<Button x:Name="searchButton" Grid.Column="1" Grid.Row="0" Margin="442,76,42,66" Content="Search/Refresh" FontSize="20" Click="searchButton_click" />
+		</Grid>
 	</Grid>
 </Window>
