@@ -24,6 +24,8 @@ namespace Zadanie04_weather
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public bool isStarted { get; set; }
+
 		public NotifyIcon TrayIcon { get; set; }
 
 		public Timer appTimer { get; set; }
@@ -32,37 +34,108 @@ namespace Zadanie04_weather
 
 		public Weather appWeather { get; set; }
 
+		public String city { get; set; }
+
 		public MainWindow()
 		{
 			InitializeComponent();
 			InitializeApp();
-
-			Weather testowy = new Weather("Katowice");
-			Weather testowy2 = new Weather("Dąbrowa Górnicza");
-			Weather testowy3 = new Weather("grand canyon, az");
-			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
 		}
 
 		public void InitializeApp()
 		{
-			InitializeTray();
-			appWeather = new Weather("katowice");
-			InitializeTimer();
+			try
+			{
+				InitializeTray();
+				timeIntervalText.Text = String.Empty;
+				InitializeTimer();
+				this.city = String.Empty;
+				this.isStarted = false;
+				this.RefreshWeather();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		private void InitializeTimer()
 		{
 			appTimer = new Timer();
-			TimeInterval = 1;
+			var tmp = this.converter();
+			if (tmp)
+				TimeInterval = Convert.ToInt32(timeIntervalText.ToString());
+			else
+				TimeInterval = 15;
 			appTimer.Interval = TimeInterval * 60000;
 			appTimer.Tick += new EventHandler(timerHandler);
 			appTimer.Start();
 		}
 
+		private bool converter()
+		{
+			try
+			{
+				Convert.ToInt32(timeIntervalText.ToString());
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		private void timerHandler(object sender, EventArgs e)
 		{
-			this.appWeather.Refresh();
-			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
+			this.RefreshWeather();
+		}
+
+		private void RefreshWeather()
+		{
+			var tmp = cityText.Text.ToString();
+			if (isStarted)
+			{
+				if (tmp != this.city)
+				{
+					this.city = cityText.Text.ToString();
+					if (String.IsNullOrWhiteSpace(this.city))
+					{
+						MessageBoxResult result = System.Windows.MessageBox.Show("Please eneter city name", "Error - no city provided", MessageBoxButton.OK, MessageBoxImage.Stop);
+					}
+					else
+					{
+						appWeather = new Weather(cityText.Text.ToString());
+						this.appWeather.Refresh();
+						this.buildWeatherForms();
+						InitializeTimer();
+					}
+				}
+			}
+		}
+
+		private void buildWeatherForms()
+		{
+			try
+			{
+				this.cityText2.Text = this.appWeather.XMLResponse.City;
+				this.conditionTempText.Text = this.appWeather.XMLResponse.ConditionTemp + " C";
+				this.conditionText.Text = this.appWeather.XMLResponse.ConditionText;
+				this.countryText.Text = this.appWeather.XMLResponse.Country;
+				this.humidityText.Text = this.appWeather.XMLResponse.Humidity + " %";
+				this.pressureText.Text = this.appWeather.XMLResponse.Pressure + " mb";
+				this.pressureIsRisingText.Text = this.appWeather.XMLResponse.PressureIsRising;
+				this.regionText.Text = this.appWeather.XMLResponse.Region;
+				this.sunriseText.Text = this.appWeather.XMLResponse.Sunrise;
+				this.sunsetText.Text = this.appWeather.XMLResponse.Sunset;
+				this.visibilityText.Text = this.appWeather.XMLResponse.Visibility + " km";
+				this.windChillText.Text = this.appWeather.XMLResponse.WindChill + " C";
+				this.windSpeedText.Text = this.appWeather.XMLResponse.WindSpeed + " kph";
+				this.windSpeedText.Text += " " + this.appWeather.XMLResponse.WindDirection;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		private void InitializeTray()
@@ -102,12 +175,13 @@ namespace Zadanie04_weather
 
 		private void Menu_Refresh(object sender, RoutedEventArgs e)
 		{
-			this.appWeather.Refresh();
-			cityText.Text = appWeather.XMLResponse.City + " " + appWeather.XMLResponse.ConditionTemp + "C " + appWeather.XMLResponse.ConditionText + " " + appWeather.XMLResponse.Country;
+			this.isStarted = true;
+			this.RefreshWeather();
 		}
 
 		private void Menu_Open(object sender, RoutedEventArgs e)
 		{
+			this.isStarted = true;
 			this.Show();
 			if (this.WindowState == WindowState.Minimized)
 				this.WindowState = WindowState.Normal;
@@ -120,6 +194,8 @@ namespace Zadanie04_weather
 
 		private void searchButton_click(object sender, RoutedEventArgs e)
 		{
+			this.isStarted = true;
+			this.RefreshWeather();
 		}
 	}
 }

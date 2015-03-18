@@ -10,10 +10,11 @@
 			<MenuItem Header="Close" Click="Menu_Close" />
 		</ContextMenu>
 	</Window.Resources>
-	<Grid>
+	<Grid Background="#FFA4A4A4">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="3*" />
-			<RowDefinition Height="3*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
 			<RowDefinition Height="3*" />
 		</Grid.RowDefinitions>
 		<Grid>
@@ -24,6 +25,49 @@
 			<TextBox Grid.Row="0" Grid.Column="1" x:Name="cityText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Margin="10,46,224,48" TextWrapping="Wrap" Text=""  Width="400" BorderThickness="3" Background="#FFABADB3" FontSize="18" />
 			<TextBlock Grid.Row="0" Grid.Column="0" x:Name="cityLabel" Height="44" Width="138" Text="City:" Margin="10,80,10,66" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="20" FontWeight="Bold" />
 			<Button x:Name="searchButton" Grid.Column="1" Grid.Row="0" Margin="442,76,42,66" Content="Search/Refresh" FontSize="20" Click="searchButton_click" />
+
+			<TextBlock Grid.Row="0" Grid.Column="0" x:Name="timeIntervalLabel" Height="44" Width="138" Text="Refresh every:" Margin="10,160,10,9" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="18" FontWeight="Bold" />
+			<TextBox Grid.Row="0" Grid.Column="1" x:Name="timeIntervalText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="37" Margin="10,167,224,9" TextWrapping="Wrap" Text=""  Width="400" BorderThickness="3" Background="#FFABADB3" FontSize="18" />
 		</Grid>
+		<TextBlock Grid.Row="1" Grid.Column="0" x:Name="regionLabel" Height="34" Width="71" Text="Region::" Margin="5,10,716,27" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="1" x:Name="regionText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="81,5,571,27" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="1" Grid.Column="0" x:Name="countryLabel" Height="34" Width="71" Margin="290,10,431,27" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" RenderTransformOrigin="2.371,0.58" Text="Country:" />
+		<TextBox Grid.Row="1" x:Name="countryText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="366,5,286,27" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="1" Grid.Column="0" x:Name="cityLabel2" Height="34" Width="71" Text="City:" Margin="566,5,155,32" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="1" x:Name="cityText2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="642,5,10,27" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<!-- Grid 2-->
+		<TextBlock Grid.Row="2" Grid.Column="0" x:Name="windChillLabel" Height="34" Width="71" Text="Wind chill:" Margin="10,15,711,22" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="2" x:Name="windChillText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="81,10,571,22" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="2" Grid.Column="0" x:Name="windSpeedLabel" Height="34" Width="80" Text="Wind speed:" Margin="281,10,431,27" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="2" x:Name="windSpeedText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="366,10,286,22" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="2" Grid.Column="0" x:Name="humidityLabel" Height="34" Width="71" Text="Humidity:" Margin="566,15,155,22" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="2" x:Name="humidityText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="642,10,10,22" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<!--Grid 3-->
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="pressureIsRisingLabeld" Height="34" Width="71" Text="Pressure is rising:" Margin="10,15,711,165" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" />
+		<TextBox Grid.Row="3" x:Name="pressureIsRisingText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="81,5,571,170" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="pressureLabel" Height="34" Width="71" Text="Pressure:" Margin="10,64,711,116" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="3" x:Name="pressureText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="81,59,571,116" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="visibilityLabel" Height="34" Width="71" Text="Visibility:" Margin="290,15,431,165" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="3" x:Name="visibilityText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="366,10,286,165" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="conditionTempLabel" Height="34" Width="80" Text="Temperature:" Margin="281,69,431,111" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" />
+		<TextBox Grid.Row="3" x:Name="conditionTempText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="366,64,286,111" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="sunriseLabel" Height="34" Width="71" Text="Sunrise:" Margin="571,15,150,165" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="3" x:Name="sunriseText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="642,10,10,165" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBlock Grid.Row="3" Grid.Column="0" x:Name="sunsetLabel" Height="34" Width="71" Text="Sunset:" Margin="571,64,150,116" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+		<TextBox Grid.Row="3" x:Name="sunsetText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="642,64,10,111" TextWrapping="Wrap" Text=""  Width="140" BorderThickness="3" Background="#FFABADB3" />
+
+		<TextBox Grid.Row="3" x:Name="conditionText" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Margin="54,130,72,45" TextWrapping="Wrap" Text=""  Width="666" BorderThickness="3" Background="#FFABADB3" FontSize="18" />
 	</Grid>
 </Window>
