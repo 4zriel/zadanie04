@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Zadanie04_weather
 {
@@ -53,20 +55,23 @@ namespace Zadanie04_weather
 					String tmpResponse = String.Empty;
 					using (xmlStream)
 					{
-						StreamReader reader = new StreamReader(xmlStream);
-						tmpResponse = reader.ReadLine();
-						while (!reader.EndOfStream)
-						{
-							tmpResponse = reader.ReadLine();
-							if (tmpResponse.Contains("<woeid>"))
-								break;
-						}
-						reader.Close();
 						xmlStream.Close();
 						response.Close();
-						XElement test = XElement.Parse(tmpResponse);
-						this.Woeid = test.Element("results").Value;
-						//this.Woeid = this.Woeid.Substring(0, 5);
+						XPathDocument xDocument = new XPathDocument(LocQuerry);
+						var xDoc = XDocument.Load(LocQuerry);
+						var xName = new XmlNamespaceManager(new NameTable());
+						xName.AddNamespace("test", "http://where.yahooapis.com/v1/schema.rng");
+						var tValue = xDoc.XPathSelectElement("//results/test:place[1]", xName);
+
+						//XPathNavigator xNav;
+						//XPathNodeIterator xNode;
+						//xNav = xDocument.CreateNavigator();
+						//string tmpQuery = "//results/test:place[1]";
+						//XmlNamespaceManager ns = new XmlNamespaceManager(xNav.NameTable);
+						//ns.AddNamespace("test", "http://where.yahooapis.com/v1/schema.rng");
+						//xNode = xNav.Select(tmpQuery, ns);
+						//XPathNavigator xP = xNode.Current;
+						this.Woeid = tValue.Value;
 					}
 				}
 			}
